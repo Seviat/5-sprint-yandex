@@ -135,13 +135,9 @@ type Walking struct {
 // Это переопределенный метод Calories() из Training.
 func (w Walking) Calories() float64 {
 	// вставьте ваш код ниже
-
 	squareMeanSpeed := math.Pow((w.meanSpeed() * KmHInMsec), 2) //квадрат средней скорости в метрах в секунду
 	HeightIM := w.Height / CmInM                                // рост в метрах
 	return ((CaloriesWeightMultiplier*w.Weight + (squareMeanSpeed/HeightIM)*CaloriesMeanSpeedMultiplier*w.Weight) * w.Duration.Hours() * MinInHours)
-	//caloriesSpend := ((CaloriesWeightMultiplier * w.Weight + ((w.meanSpeed()*kmhInMsec)*(w.meanSpeed()*kmhInMsec) / w.Height/CmInM) * CaloriesSpeedHeightMultiplier *w.Weight) * w.Duration.Hours() * MinInHours)
-	//return caloriesSpend
-	// Я знаю что лучше было обойтись caloriesSpend, но Visual ругался на нечитаемый код =(
 }
 
 // TrainingInfo возвращает структуру InfoMessage с информацией о проведенной тренировке.
@@ -181,14 +177,14 @@ func (s Swimming) meanSpeed() float64 {
 // Это переопределенный метод Calories() из Training.
 func (s Swimming) Calories() float64 {
 	// вставьте ваш код ниже
-	return (s.Training.meanSpeed() + SwimmingCaloriesMeanSpeedShift) * SwimmingCaloriesWeightMultiplier * s.Weight * s.Duration.Hours()
+	return (s.meanSpeed() + SwimmingCaloriesMeanSpeedShift) * SwimmingCaloriesWeightMultiplier * s.Weight * s.Duration.Hours()
 }
 
 // TrainingInfo returns info about swimming training.
 // Это переопределенный метод TrainingInfo() из Training.
 func (s Swimming) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	return s.TrainingInfo()
+	return s.Training.TrainingInfo()
 }
 
 // ReadData возвращает информацию о проведенной тренировке.
